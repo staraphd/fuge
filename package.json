@@ -29,7 +29,7 @@
     "death": "^1.0.0",
     "fuge-config": "^2.0.1",
     "fuge-dns": "^2.0.0",
-    "fuge-runner": "^2.0.1",
+    "fuge-runner": "https://github.com/vjgn/fuge-runner.git",
     "tpmorp": "^1.0.5"
   },
   "repository": {
@@ -43,7 +43,8 @@
     "lint": "echo 'linting...' && spacey-standard | snazzy",
     "test": "node test/basic.test.js",
     "commit-check": "npm run test && npm run lint",
-    "coverage": "istanbul cover test/*.test.js && open ./coverage/lcov-report/index.html"
+    "coverage": "istanbul cover test/*.test.js && open ./coverage/lcov-report/index.html",
+    "prepare": "npm run build"
   },
   "devDependencies": {
     "istanbul": "^0.4.5",
