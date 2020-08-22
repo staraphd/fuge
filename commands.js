@@ -382,11 +382,23 @@ module.exports = function () {
     if (_dns) {
       var list = _dns.listRecords()
       _.each(list, function (entry) {
-        if (entry.record._type === 'A') {
-          table.push(['A'.white, entry.domain.substring(0, 59).white, entry.record.target.substring(0, 59).white, '-'.white])
+        if(entry.record.length) {
+          entry.record.forEach(e => {
+            if (e._type === 'A') {
+              table.push(['A'.white, entry.domain.substring(0, 59).white, e.target.substring(0, 59).white, '-'.white])
+            }
+            if (e._type === 'SRV') {
+              table.push(['SRV'.white, entry.domain.substring(0, 59).white, e.target.substring(0, 59).white, e.port.white])
+            }
+          })
         }
-        if (entry.record._type === 'SRV') {
-          table.push(['SRV'.white, entry.domain.substring(0, 59).white, entry.record.target.substring(0, 59).white, entry.record.port.white])
+        else {
+          if (entry.record._type === 'A') {
+            table.push(['A'.white, entry.domain.substring(0, 59).white, entry.record.target.substring(0, 59).white, '-'.white])
+          }
+          if (entry.record._type === 'SRV') {
+            table.push(['SRV'.white, entry.domain.substring(0, 59).white, entry.record.target.substring(0, 59).white, entry.record.port.white])
+          }
         }
       })
       console.log(table.toString())

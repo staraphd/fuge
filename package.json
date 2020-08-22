@@ -27,8 +27,8 @@
     "colors": "^1.1.2",
     "commist": "^1.0.0",
     "death": "^1.0.0",
-    "fuge-config": "^2.0.1",
-    "fuge-dns": "^2.0.0",
+    "fuge-config": "https://github.com/vjgn/fuge-config.git",
+    "fuge-dns": "https://github.com/vjgn/fuge-dns.git",
     "fuge-runner": "https://github.com/vjgn/fuge-runner.git",
     "tpmorp": "^1.0.5"
   },
