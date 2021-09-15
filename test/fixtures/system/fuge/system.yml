@@ -2,6 +2,7 @@ fuge_global:
   run_containers: false
   tail: true
   dns_enabled: true
+  dns_port: 53153
   monitor: false
   monitor_excludes:
     - '**/node_modules/**'
