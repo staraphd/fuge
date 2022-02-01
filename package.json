@@ -43,7 +43,7 @@
     "lint": "echo 'linting...' && spacey-standard | snazzy",
     "test": "node test/basic.test.js",
     "commit-check": "npm run test && npm run lint",
-    "coverage": "nyc npm run test test/*.test.js && open ./coverage/lcov-report/index.html"
+    "coverage": "nyc npm run test test/*.test.js"
   },
   "devDependencies": {
     "nyc": "^15.1.0",
