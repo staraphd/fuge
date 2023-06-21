@@ -98,8 +98,13 @@ module.exports = function () {
   function isGroup (args, system) {
     var isgroup = false
     _.each(system.topology.containers, function (container) {
-      if (args[0] === container.group) {
-        isgroup = true
+      if (typeof container.group !== 'undefined') {
+        const containerGroupArray = container.group.split(' ')
+        for (let i = 0; i < containerGroupArray.length; i++) {
+          if (args === containerGroupArray[i]) {
+            isgroup = true
+          }
+        }
       }
     })
     if (isgroup === true) {
@@ -125,7 +130,7 @@ module.exports = function () {
   var startProcess = function (args, system, cb) {
     if (args.length === 1) {
       if (args[0] === 'all') { _runner.startAll(system, cb) } else
-      if (isGroup(args, system)) { startGroup(args, system, cb) } else { _runner.start(system, args[0], cb) }
+      if (isGroup(args[0], system)) { startGroup(args[0], system, cb) } else { _runner.start(system, args[0], cb) }
     } else {
       cb('usage: start <process> | <group> | all')
     }
@@ -382,7 +387,7 @@ module.exports = function () {
     if (_dns) {
       var list = _dns.listRecords()
       _.each(list, function (entry) {
-        if(entry.record.length) {
+        if (entry.record.length) {
           entry.record.forEach(e => {
             if (e._type === 'A') {
               table.push(['A'.white, entry.domain.substring(0, 59).white, e.target.substring(0, 59).white, '-'.white])
@@ -391,8 +396,7 @@ module.exports = function () {
               table.push(['SRV'.white, entry.domain.substring(0, 59).white, e.target.substring(0, 59).white, e.port.white])
             }
           })
-        }
-        else {
+        } else {
           if (entry.record._type === 'A') {
             table.push(['A'.white, entry.domain.substring(0, 59).white, entry.record.target.substring(0, 59).white, '-'.white])
           }
@@ -433,8 +437,14 @@ module.exports = function () {
 
   var startGroup = function (args, system, cb) {
     _.each(system.topology.containers, function (container) {
-      if (container.group === args[0]) {
-        _runner.start(system, container.name, cb)
+      if (typeof container.group !== 'undefined') {
+        const containerGroupArray = container.group.split(' ')
+        for (let i = 0; i < containerGroupArray.length; i++) {
+          if (args === containerGroupArray[i]) {
+            // console.log('args = ' + args + ', containerGroupArray[i] = ' + containerGroupArray[i] + ', container.name = ' + container.name)
+            _runner.start(system, container.name, cb)
+          }
+        }
       }
     })
   }

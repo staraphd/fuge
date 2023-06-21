@@ -50,7 +50,7 @@ module.exports = function (hardExit) {
     death({uncaughtException: true})(function (signal, err) {
       console.log('ERROR: '.red)
       console.log(('' + signal).red)
-      if (err) { 
+      if (err) {
         if (err.code) console.log((err.code).red)
         if (err.message) console.log((err.message).red)
         if (err.stack) console.log((err.stack).red)
