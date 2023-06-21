@@ -23,9 +23,9 @@
     "node": "*"
   },
   "dependencies": {
-    "cli-table": "^0.3.6",
+    "cli-table": "^0.3.11",
     "colors": "^1.4.0",
-    "commist": "^2.0.0",
+    "commist": "^3.2.0",
     "death": "^1.1.0",
     "fuge-config": "https://github.com/vjgn/fuge-config.git",
     "fuge-dns": "https://github.com/vjgn/fuge-dns.git",

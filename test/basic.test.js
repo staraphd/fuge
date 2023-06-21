@@ -31,8 +31,8 @@ var scenarios = {
   restart: {cmds: ['start runme', 'restart runme', 'ps', 'stop runme'], expect: [/runme.*node.*running.*no.*yes/g], delay: 1000},
   startStopGroup: {cmds: ['start default', 'ps', 'stop default'], expect: [/runme.*node.*running.*no.*yes/g, /runmetoo.*process.*running.*no.*no/g], delay: 1000},
   restartGroup: {cmds: ['start default', 'restart default', 'ps', 'stop default'], expect: [/runme.*node.*running.*no.*yes/g], delay: 1000},
-  grep: {cmds: ['grep Server runme'], expect: [/*/Server running at http/g*/]},
-  grepAll: {cmds: ['grep Server'], expect: [/*/Server running at http/g*/]},
+  grep: {cmds: ['grep Server runme'], expect: [/* /Server running at http/g */]},
+  grepAll: {cmds: ['grep Server'], expect: [/* /Server running at http/g */]},
   debug: {cmds: ['debug runme', 'ps', 'stop runme'], expect: [/runme.*node.*running.*no.*yes/g, /runmetoo.*process.*stopped.*no.*no/g], delay: 1000},
   watch: {cmds: ['watch runme', 'unwatch runme', 'ps'], expect: [/runme.*node.*stopped.*no.*yes/g, /runmetoo.*process.*stopped.*no.*no/g]},
   pull: {cmds: ['pull runme', 'pull all'], expect: [/no repository url specified or duplicate url/g]},
@@ -44,7 +44,7 @@ runner.start('system.yml', function () {
   async.eachSeries(Object.keys(scenarios), function (key, next) {
     console.log('----------[ command: ' + key + ' ]----------')
     runner.run(scenarios[key], function (result, output) {
-      // console.log('result=', result)
+      console.log('result=', result)
       assert(result, 'check ' + key + ' results as expected')
       next()
     })
